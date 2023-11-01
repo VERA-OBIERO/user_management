@@ -9,10 +9,9 @@ function App () {
     console.log(user)
   }
 
-  const name = "John Doe"
   return (
     <div className="container mt-5" >
-      <UserForm handleSaveUser={handleSaveUser} firstName={name} />
+      <UserForm handleSaveUser={handleSaveUser} />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -6,35 +6,79 @@ import Stack from 'react-bootstrap/Stack';
 
 //props destructuring 
 const UserForm = (props) => {
-  const {firstName, handleSaveUser} = props
-    console.log(handleSaveUser);
+  const {handleSaveUser} = props;
 
-    const handleClick = () => {
-      console.log("Clicked 2")
-    }
-    // useEffect(() => {
-    //   const button = document.getElementById('submit')
-    //   button.addEventListener('click', handleClick)
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
+  // const [age, setAge] = useState('');
 
-    // },[])
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    age: ''
+  })
+  // console.log(formData['lastName'])
 
+  const handleFormData = (e)  => {
 
+    setFormData({...formData, [e.target.name]: e.target.value})
+
+    //console.log({[e.target.name]: e.target.value});
+    //console.log({firstName : 'John'});
+  };
+
+  const handleSaveForm = (e) => {
+    //prevents the deafault form behaviour of reloading
+    e.preventDefault();
+    handleSaveUser(formData)
+
+  }
+
+  //console.log({firstName, lastName, age})
 
     return (
+      <form onSubmit={handleSaveForm}>
         <Stack direction="horizontal" gap={3}>
-        <Form.Control className="me-auto" placeholder="Add your item here..." />
-        <Form.Control className="me-auto" placeholder="Add your item here..." />
-        <Button 
-         //id='submit'
-         variant="secondary" 
-         onClick= {handleClick}
+          
+            <Form.Control 
+            className="me-auto" 
+            placeholder="First name"
+            name ='firstName'
+            required
+            value={formData['firstName']} 
+            onChange={(e) => handleFormData(e)} 
+          />
+          <Form.Control 
+            className="me-auto" 
+            placeholder="Last name"
+            name = 'lastName'
+            required
+            value={formData['lastName']}
+            onChange={(e) => handleFormData(e)}
+          />
+          <Form.Control 
+            className="me-auto" 
+            placeholder="Age"
+            name= 'age'
+            type="number"
+            required
+            value={formData['age']}
+            onChange={(e) => handleFormData(e)} 
+          />
+          <Button 
+            //id='submit'
+            variant="secondary"
+            type='submit'
+            //onClick= {handleClick}
         
-        //onClick={() => handleSaveUser({firstName: 'John'})}
-        >Submit
-        </Button>
-        <div className="vr" />
-        <Button variant="outline-danger">Reset</Button>
-      </Stack>
+            //onClick={() => handleSaveUser(formData)}
+           >Submit
+          </Button>
+          <div className="vr" />
+          <Button variant="outline-danger" type="reset">Reset</Button>
+         
+       </Stack>
+      </form>
     )
 }
 
