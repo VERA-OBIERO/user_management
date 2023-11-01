@@ -8,15 +8,17 @@ import Stack from 'react-bootstrap/Stack';
 const UserForm = (props) => {
   const {handleSaveUser} = props;
 
+  const user = {
+    firstName: '',
+    lastName: '',
+    age: ''
+  }
+
   // const [firstName, setFirstName] = useState('');
   // const [lastName, setLastName] = useState('');
   // const [age, setAge] = useState('');
 
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    age: ''
-  })
+  const [formData, setFormData] = useState(user);
   // console.log(formData['lastName'])
 
   const handleFormData = (e)  => {
@@ -30,7 +32,10 @@ const UserForm = (props) => {
   const handleSaveForm = (e) => {
     //prevents the deafault form behaviour of reloading
     e.preventDefault();
-    handleSaveUser(formData)
+    handleSaveUser(formData);
+    //reset the entire form
+
+    setFormData(user);
 
   }
 
