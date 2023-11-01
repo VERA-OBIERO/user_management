@@ -1,10 +1,20 @@
+import {useState} from 'react';
+import UserForm from "./components/UserForm"
 
 
-function App() {
+function App () {
+  const [users, setUsers] = useState([]);
 
+  const handleSaveUser = (user) => {
+    console.log(user)
+  }
+
+  const name = "John Doe"
   return (
-    <>Home</>
+    <div className="container mt-5" >
+      <UserForm handleSaveUser={handleSaveUser} firstName={name} />
+    </div>
   )
 }
 
-export default App
+export default App;
