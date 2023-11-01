@@ -63,7 +63,7 @@ const UserForm = (props) => {
             type="number"
             required
             value={formData['age']}
-            onChange={(e) => handleFormData(e)} 
+            onChange={handleFormData} 
           />
           <Button 
             //id='submit'
